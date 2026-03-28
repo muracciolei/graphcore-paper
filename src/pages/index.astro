@@ -1,0 +1,238 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Base256SpectralMatrixGrid from '../components/Base256SpectralMatrixGrid.astro';
+import MultiStateToneEncodingDiagram from '../components/MultiStateToneEncodingDiagram.astro';
+import ContinuousSignalFlowDiagram from '../components/ContinuousSignalFlowDiagram.astro';
+import SpectralLogicTransformationDiagram from '../components/SpectralLogicTransformationDiagram.astro';
+import ArchitectureDiagram from '../components/ArchitectureDiagram.astro';
+import ExecutionFlowDiagram from '../components/ExecutionFlowDiagram.astro';
+import MemoryDiagram from '../components/MemoryDiagram.astro';
+---
+<BaseLayout title="GraphCore: Concept Paper v0.1">
+
+  <blockquote class="disclaimer-box">
+    <strong>Disclaimer</strong>
+    <p>GraphCore is a conceptual computing architecture. This document describes forward-looking engineering ideas and theoretical models intended to stimulate research exploration. The concepts presented are not claims of existing hardware implementations, but proposals for future investigation.</p>
+  </blockquote>
+
+  <section id="abstract">
+    <h2>Abstract</h2>
+    <p>
+      GraphCore proposes a radically new computing paradigm: a photonic processor built on a programmable graphene substrate, where hardware architecture is dynamically encoded and executed via light. This system integrates computation, memory, storage, and energy into a single unified physical layer. Crucially, GraphCore abandons classical binary computation in favor of a 256-state multi-dimensional spectral logic system, enabling continuous computational flow and eliminating binary switching latency entirely.
+    </p>
+  </section>
+
+  <section id="concept">
+    <h2>Concept Definition</h2>
+    <p>
+      Unlike traditional silicon-based processors that rely on fixed logic gates and electron flow, GraphCore utilizes the exceptional optoelectronic properties of graphene to serve as a universal medium. Photonic signals—defined by precise combinations of wavelengths and phase states—simultaneously act as data carriers, active logic, and dynamic architectural scaffolding.
+    </p>
+  </section>
+
+  <section id="assumptions">
+    <h2>Engineering Assumptions</h2>
+    <p>
+      The models presented in this conceptual paper rely on the following engineering assumptions and boundaries:
+    </p>
+    <ul>
+      <li><strong>Substrate Stability:</strong> Graphene substrates can support dynamic, stable photonic routing paths via precisely applied optoelectronic gating.</li>
+      <li><strong>Phase Precision:</strong> Phase control at 16 discrete, distinguishable levels is actively achievable at operational scales.</li>
+      <li><strong>Wavelength Discretization:</strong> Wavelength separation precision across 16 extremely narrow optical bands can be maintained without significant bleed.</li>
+      <li><strong>Thermal Mitigation:</strong> Thermal spectral drift—endemic to dense photonic computation—can be corrected through real-time localized cooling control systems.</li>
+      <li><strong>Crosstalk Management:</strong> Destructive spectral interference can be managed via quantum boundary isolation logic within the substrate.</li>
+    </ul>
+  </section>
+
+  <section id="multi-state-logic">
+    <h2>Multi-State Photonic Logic Model</h2>
+    <p>
+      GraphCore defines logical computation using a <strong>multi-dimensional spectral encoding system</strong>. Instead of relying on binary switching states (<code>0</code> and <code>1</code>), GraphCore represents logical values using <strong>256 distinct spectral states</strong>.
+    </p>
+    <p>
+      Each spectral state is physically defined by a precise combination of two optical properties: <strong>Wavelength (λ)</strong> and <strong>Phase (φ)</strong>. In the base configuration, 16 discrete wavelengths are linearly combined with 16 discrete phase states. This deterministic optical encoding produces exactly 16 &times; 16 = 256 unique permutations.
+    </p>
+    <p>
+      Each specific permutation represents a distinct logical value. Logical value zero (equivalent to internal null logic) is not represented by the absence of a signal, but by a valid baseline spectral configuration. Because energy never drops to zero, GraphCore facilitates mathematically continuous computational propagation.
+    </p>
+
+    <h3>Spectral State Indexing Rule</h3>
+    <p>
+      The logical state configuration across the computational domain maps strictly to an indexing array. The state identification formula is defined as:
+    </p>
+    <blockquote>
+      SpectralState_n = (λ_index &times; 16) + φ_index
+    </blockquote>
+    <p>
+      Where <code>λ_index</code> functions as the coarse logical multiplier (0 to 15) and <code>φ_index</code> serves as the fine logical additive (0 to 15), deterministically yielding integer equivalents from 0 to 255 natively mapped into photon state.
+    </p>
+
+    <h3>Base-256 Spectral Matrix Model</h3>
+    <p>
+      The following grid illustrates the complete theoretical operational domain comprising the structural <code>SpectralState</code> values. This matrix defines the full Base-256 logical scope.
+    </p>
+    
+    <Base256SpectralMatrixGrid />
+    <MultiStateToneEncodingDiagram />
+
+  </section>
+
+  <section id="primitive-operations">
+    <h2>Primitive Spectral Operations</h2>
+    <p>
+      In a system lacking fixed binary logic gates (AND, OR, XOR), base computation must originate from continuous transformation matrices. Primitive operations execute natively via interference physics.
+    </p>
+    <ul>
+      <li><code>ADD_spectral(A, B)</code>: Direct additive interference augmenting wavelength parity.</li>
+      <li><code>SHIFT_spectral(A)</code>: Phase modulation resulting in controlled logical escalation.</li>
+      <li><code>MAP_spectral(A)</code>: Topological relocation of a state across the routing domain without transformation.</li>
+      <li><code>INTERFERE(A, B)</code>: Forced collision of two spectral states within a dedicated confinement loop, enforcing non-linear derivation.</li>
+    </ul>
+    <p>
+      <em>Conceptual Example:</em><br>
+      <code>SpectralState_12 + SpectralState_4 &rarr; SpectralState_16</code><br>
+      These transformations occur instantly across specific interference topologies rather than iterating through binary logic tree paths.
+    </p>
+  </section>
+
+  <section id="propagation-speed">
+    <h2>Propagation Speed Model</h2>
+    <p>
+      Data executes via continuous photonic transmission across the graphene lattice. Because calculations ride upon photons exclusively, absolute signal propagation latency fundamentally borders theoretical light-speed limits dictated by the optical density of the medium.
+    </p>
+    <p>
+      Classical electron drift velocity limits inherent to silicon barriers are entirely bypassed. Consequently, GraphCore yields near real-time, ultra-low-latency asynchronous execution.
+    </p>
+  </section>
+
+  <section id="continuous-signal">
+    <h2>Continuous Signal Flow Model</h2>
+    <p>
+      Traditional discrete electronics mandate continuous interruption: alternating between low and high voltages forces significant transition timing delays. 
+    </p>
+    
+    <h3>Signal Transition Model</h3>
+    <p>
+      In GraphCore, spectral transitions occur as mathematically continuous shifts between specific wavelength-phase topologies. GraphCore logic never abruptly snaps voltage levels. Rather, calculation acts as a fluid spectrum traversal.
+    </p>
+    <p>
+      <em>Conceptual Transition Pathway:</em><br>
+      <code>SpectralState_42 &rarr; SpectralState_43 &rarr; SpectralState_87</code><br>
+      This represents a continuous, uninterrupted computational execution flow dynamically resolving the specified logic equation without any clock-enforced binary reset loops.
+    </p>
+
+    <ContinuousSignalFlowDiagram />
+  </section>
+
+  <section id="architecture">
+    <h2>Architecture Integration</h2>
+    <p>
+      Physical logic nodes are completely soft-defined constructs. The system allocates dynamic "computation areas" mapping optical interference topologies out of the base grid. Data paths dynamically wire around faults or thermal hotspots sequentially at the speed of light.
+    </p>
+    <ArchitectureDiagram />
+  </section>
+
+  <section id="execution">
+    <h2>Execution Model & Spectral Transformation</h2>
+    <p>
+      Operations synthesize precisely via the merging of two distinct optical vectors navigating carefully established collision geometries—commonly labeled <em>programmable interference nodes</em>.
+    </p>
+    <p>
+      As an input <code>SpectralState_A</code> combines inside an interference field with <code>SpectralState_B</code>, the resultant output wave stabilizes immediately into <code>SpectralState_C</code>. The duration of this execution is purely the transit time across the node length.
+    </p>
+    
+    <SpectralLogicTransformationDiagram />
+    <ExecutionFlowDiagram />
+  </section>
+
+  <section id="memory">
+    <h2>Memory & Storage Topology</h2>
+    <p>
+      Memory and storage exist fluidly on the identical substrate. Volatile memory isolates spectral states securely into persistent quantum cavity loops—circulating dynamically but maintaining coherent <code>λ, φ</code> states to ensure optical caching stability without data degradation over short execution runs.
+    </p>
+    <p>
+      Long-term storage resolves specifically into structural wavelength alignment patterns—a crystallized optical configuration retaining near-zero resting energy.
+    </p>
+    <MemoryDiagram />
+  </section>
+
+  <section id="programming">
+    <h2>Programming Model</h2>
+    <p>
+      Compilation discards standard x86/ARM binary assembly. Compilers for GraphCore natively transcribe higher-order logic directly into unified execution maps defining:
+    </p>
+    <ul>
+      <li><strong>Spectral state mappings:</strong> Linking data structures to the 256 matrix index variables.</li>
+      <li><strong>Topology routing:</strong> Direct physical blueprint generation.</li>
+      <li><strong>Spectral transformations:</strong> The exact angles and loop sizes necessary to build non-linear computational operators.</li>
+    </ul>
+  </section>
+
+  <section id="comparison">
+    <h2>Analysis: Logic Comparison Systems</h2>
+    
+    <div style="overflow-x:auto;">
+      <table>
+        <thead>
+          <tr>
+            <th>Platform Architecture</th>
+            <th>Primary Logic System</th>
+            <th>Hardware Paradigm</th>
+            <th>Fundamental Signal State</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Standard CPU Architecture</td>
+            <td>Binary (Base-2)</td>
+            <td>Rigid &amp; Fixed</td>
+            <td>Discrete Voltage Pulses</td>
+          </tr>
+          <tr>
+            <td>GPU / Tensor Systems</td>
+            <td>Binary (Base-2)</td>
+            <td>Fixed Parallel Matrices</td>
+            <td>Discrete Voltage Pulses</td>
+          </tr>
+          <tr>
+            <td>Quantum Computing Arrays</td>
+            <td>Qubits (Superposition)</td>
+            <td>Fixed Physical Quantum Gates</td>
+            <td>Probabilistic Vectors</td>
+          </tr>
+          <tr>
+            <td><strong>GraphCore Proposal</strong></td>
+            <td><strong>Spectral Matrix (Base-256)</strong></td>
+            <td><strong>Software-Defined Dynamic Geometry</strong></td>
+            <td><strong>Continuous Optical Spectrum Flow</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="limitations">
+    <h2>Limitations & Extreme Challenges</h2>
+    <p>
+      GraphCore theory outlines optimal scenarios. In practicality, engineering this processor relies on overcoming extreme physical thresholds:
+    </p>
+    <ul>
+      <li><strong>Spectral Crosstalk:</strong> High-density light interference in adjacent waveguides will severely cross-contaminate state purity, forcing erroneous optical shifts.</li>
+      <li><strong>Phase Drift & Coherence Loss:</strong> Thermal variances occurring dynamically during computation will warp index refraction slightly, degrading the precise definition of specific <code>φ</code> indices.</li>
+      <li><strong>Optical Noise:</strong> Base electron scatter inherently trapped in the graphene lattice will generate random wavelength spikes, corrupting local logical states.</li>
+      <li><strong>Manufacturing Yield Constraints:</strong> Nanoscale fabrication scaling capable of enforcing pure deterministic graphene edges currently exceeds general commercial abilities.</li>
+      <li><strong>Alignment Sensitivity:</strong> System interfacing between classical digital IO peripherals and light-based array entry points demands micron-level alignment stability across all thermal envelopes.</li>
+    </ul>
+  </section>
+
+  <section id="references">
+    <h2>References & Theoretical Reading</h2>
+    <ul>
+      <li><strong>Graphene Physics:</strong> <a href="https://en.wikipedia.org/wiki/Graphene">Optical transparency and electronic band structures in 2D lattices.</a></li>
+      <li><strong>Photonic Computing:</strong> <a href="https://en.wikipedia.org/wiki/Photonic_computing">Waveguide routing and continuous vector matrix multiplication modeling.</a></li>
+      <li><strong>Multi-Valued Logic:</strong> <a href="https://en.wikipedia.org/wiki/Multi-valued_logic">High-radix architectures scaling beyond classic Boolean structures.</a></li>
+      <li><strong>Optical Interference:</strong> <a href="https://en.wikipedia.org/wiki/Interference_(wave_propagation)">Constructive and destructive geometric phase wave modeling.</a></li>
+      <li><strong>Quantum Photonics:</strong> <a href="https://en.wikipedia.org/wiki/Quantum_computing">Phase decoherence mitigation within solid-state optical bounds.</a></li>
+    </ul>
+  </section>
+
+</BaseLayout>

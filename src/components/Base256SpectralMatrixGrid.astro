@@ -1,0 +1,59 @@
+---
+// src/components/Base256SpectralMatrixGrid.astro
+const wavelengths = Array.from({length: 16}, (_, i) => i);
+const phases = Array.from({length: 16}, (_, i) => i);
+---
+<div class="diagram-container matrix-wrapper">
+  <svg viewBox="0 0 800 650" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+    <rect width="800" height="650" fill="#05080e" />
+    
+    <text x="400" y="40" font-family="'JetBrains Mono', monospace" font-size="16" fill="#e2e8f0" font-weight="600" text-anchor="middle" letter-spacing="1">CONCEPTUAL BASE-256 SPECTRAL MATRIX</text>
+    <text x="400" y="60" font-family="'JetBrains Mono', monospace" font-size="12" fill="#64748b" text-anchor="middle">SpectralState_n = (λ_index &times; 16) + φ_index</text>
+
+    <!-- Axes -->
+    <text x="400" y="90" font-family="'JetBrains Mono', monospace" font-size="12" fill="#94a3b8" text-anchor="middle">Phase Index (φ₀ - φ₁₅)</text>
+    <text x="110" y="350" font-family="'JetBrains Mono', monospace" font-size="12" fill="#94a3b8" text-anchor="middle" transform="rotate(-90 110 350)">Wavelength Index (λ₀ - λ₁₅)</text>
+
+    <!-- Grid -->
+    <g transform="translate(180, 110)">
+      {wavelengths.map(l => (
+        <text x="-15" y={l * 30 + 15} font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b" text-anchor="end" alignment-baseline="middle">λ{l}</text>
+      ))}
+
+      {phases.map(p => (
+        <text x={p * 30 + 10} y="-10" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b" text-anchor="middle">φ{p}</text>
+      ))}
+
+      {wavelengths.map(l => 
+        phases.map(p => {
+          const hue = (l / 15) * 300; // Map wavelength to color spectrum
+          const lightness = 25 + (p / 15) * 45; // Map phase to brightness
+          const label = l * 16 + p;
+          return (
+            <g class="matrix-cell">
+              <rect x={p * 30} y={l * 30} width="20" height="20" fill={`hsl(${hue}, 60%, ${lightness}%)`} rx="3" stroke="#1e293b" stroke-width="0.5" />
+              {p === 0 || p === 15 || l === 0 || l === 15 ? 
+                <text x={p * 30 + 10} y={l * 30 + 14} font-family="'JetBrains Mono', monospace" font-size="6" fill="#ffffff" opacity="0.6" text-anchor="middle" pointer-events="none">{label}</text>
+              : null}
+            </g>
+          );
+        })
+      )}
+    </g>
+  </svg>
+</div>
+
+<style>
+.diagram-container {
+  margin: 3rem 0;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: #05080e;
+}
+.matrix-cell:hover rect {
+  stroke: #cbd5e1;
+  stroke-width: 1.5;
+  cursor: crosshair;
+}
+</style>

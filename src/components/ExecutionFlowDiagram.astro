@@ -1,0 +1,222 @@
+---
+// ExecutionFlowDiagram.astro - Conceptual SVG diagram of GraphCore execution flow
+---
+
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" class="execution-flow-diagram">
+  <defs>
+    <!-- Glow filter for cyan lines -->
+    <filter id="glow-cyan" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feFlood flood-color="#38bdf8" flood-opacity="0.6" result="color" />
+      <feComposite in="color" in2="blur" operator="in" result="shadow" />
+      <feMerge>
+        <feMergeNode in="shadow" />
+        <feMergeNode in="shadow" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Glow filter for indigo nodes -->
+    <filter id="glow-indigo" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feFlood flood-color="#6366f1" flood-opacity="0.4" result="color" />
+      <feComposite in="color" in2="blur" operator="in" result="shadow" />
+      <feMerge>
+        <feMergeNode in="shadow" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Glow filter for violet accents -->
+    <filter id="glow-violet" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feFlood flood-color="#a78bfa" flood-opacity="0.5" result="color" />
+      <feComposite in="color" in2="blur" operator="in" result="shadow" />
+      <feMerge>
+        <feMergeNode in="shadow" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Arrowhead marker for flow direction -->
+    <marker id="arrow-cyan" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#38bdf8" />
+    </marker>
+
+    <!-- Dashed arrowhead marker -->
+    <marker id="arrow-violet" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#a78bfa" />
+    </marker>
+
+    <!-- Photon source gradient -->
+    <radialGradient id="photon-gradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fbbf24" stop-opacity="1" />
+      <stop offset="60%" stop-color="#f59e0b" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#d97706" stop-opacity="0.4" />
+    </radialGradient>
+
+    <!-- Node gradient -->
+    <linearGradient id="node-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#818cf8" />
+      <stop offset="100%" stop-color="#6366f1" />
+    </linearGradient>
+
+    <!-- Switch gradient -->
+    <linearGradient id="switch-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c084fc" />
+      <stop offset="100%" stop-color="#a78bfa" />
+    </linearGradient>
+  </defs>
+
+  <!-- Dark background -->
+  <rect width="800" height="400" fill="#0a0e17" rx="8" />
+
+  <!-- Subtle grid pattern -->
+  <g opacity="0.06" stroke="#38bdf8" stroke-width="0.5">
+    <line x1="0" y1="50" x2="800" y2="50" />
+    <line x1="0" y1="100" x2="800" y2="100" />
+    <line x1="0" y1="150" x2="800" y2="150" />
+    <line x1="0" y1="200" x2="800" y2="200" />
+    <line x1="0" y1="250" x2="800" y2="250" />
+    <line x1="0" y1="300" x2="800" y2="300" />
+    <line x1="0" y1="350" x2="800" y2="350" />
+    <line x1="100" y1="0" x2="100" y2="400" />
+    <line x1="200" y1="0" x2="200" y2="400" />
+    <line x1="300" y1="0" x2="300" y2="400" />
+    <line x1="400" y1="0" x2="400" y2="400" />
+    <line x1="500" y1="0" x2="500" y2="400" />
+    <line x1="600" y1="0" x2="600" y2="400" />
+    <line x1="700" y1="0" x2="700" y2="400" />
+  </g>
+
+  <!-- ============================== -->
+  <!-- Stage 1: Photon Source         -->
+  <!-- ============================== -->
+  <g>
+    <!-- Photon source circle -->
+    <circle cx="80" cy="200" r="28" fill="url(#photon-gradient)" filter="url(#glow-cyan)" />
+    <circle cx="80" cy="200" r="18" fill="none" stroke="#fbbf24" stroke-width="1.5" opacity="0.6">
+      <animate attributeName="r" values="18;24;18" dur="2s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2s" repeatCount="indefinite" />
+    </circle>
+    <!-- P icon -->
+    <text x="80" y="206" text-anchor="middle" fill="#0a0e17" font-family="'Courier New', monospace" font-size="16" font-weight="bold">P</text>
+    <!-- Label -->
+    <text x="80" y="260" text-anchor="middle" fill="#94a3b8" font-family="'Courier New', monospace" font-size="11" letter-spacing="0.5">Photon Source</text>
+  </g>
+
+  <!-- ============================== -->
+  <!-- Arrow: Source → Optical Switch -->
+  <!-- ============================== -->
+  <line x1="110" y1="200" x2="185" y2="200" stroke="#38bdf8" stroke-width="2.5" filter="url(#glow-cyan)" marker-end="url(#arrow-cyan)" />
+
+  <!-- ============================== -->
+  <!-- Stage 2: Optical Switch        -->
+  <!-- ============================== -->
+  <g>
+    <!-- Diamond shape -->
+    <polygon points="220,160 260,200 220,240 180,200" fill="url(#switch-gradient)" filter="url(#glow-violet)" />
+    <!-- Inner diamond -->
+    <polygon points="220,172 248,200 220,228 192,200" fill="none" stroke="#c084fc" stroke-width="1" opacity="0.5" />
+    <!-- Switch icon lines -->
+    <line x1="210" y1="192" x2="230" y2="208" stroke="#0a0e17" stroke-width="2.5" stroke-linecap="round" />
+    <line x1="210" y1="208" x2="230" y2="192" stroke="#0a0e17" stroke-width="2.5" stroke-linecap="round" />
+    <!-- Label -->
+    <text x="220" y="260" text-anchor="middle" fill="#94a3b8" font-family="'Courier New', monospace" font-size="11" letter-spacing="0.5">Optical Switch</text>
+  </g>
+
+  <!-- ============================== -->
+  <!-- Branching paths from switch    -->
+  <!-- ============================== -->
+
+  <!-- Upper branch (primary) -->
+  <path d="M 260,185 C 300,140 310,140 345,140" stroke="#38bdf8" stroke-width="2.5" fill="none" filter="url(#glow-cyan)" marker-end="url(#arrow-cyan)" />
+
+  <!-- Lower branch (secondary) -->
+  <path d="M 260,215 C 300,260 310,260 345,260" stroke="#a78bfa" stroke-width="1.5" fill="none" stroke-dasharray="6 4" opacity="0.7" marker-end="url(#arrow-violet)" />
+
+  <!-- ============================== -->
+  <!-- Stage 3: Logic Gates           -->
+  <!-- ============================== -->
+
+  <!-- Upper logic gate (AND) -->
+  <g>
+    <rect x="345" y="115" width="60" height="50" rx="6" fill="url(#node-gradient)" filter="url(#glow-indigo)" />
+    <text x="375" y="145" text-anchor="middle" fill="#e0e7ff" font-family="'Courier New', monospace" font-size="14" font-weight="bold">AND</text>
+    <!-- Label -->
+    <text x="375" y="100" text-anchor="middle" fill="#94a3b8" font-family="'Courier New', monospace" font-size="11" letter-spacing="0.5">Logic Gate</text>
+  </g>
+
+  <!-- Lower logic gate (XOR) -->
+  <g>
+    <rect x="345" y="235" width="60" height="50" rx="6" fill="url(#node-gradient)" filter="url(#glow-indigo)" opacity="0.7" />
+    <text x="375" y="265" text-anchor="middle" fill="#e0e7ff" font-family="'Courier New', monospace" font-size="14" font-weight="bold">XOR</text>
+  </g>
+
+  <!-- Inter-gate connection -->
+  <line x1="375" y1="165" x2="375" y2="235" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.5" filter="url(#glow-violet)" />
+
+  <!-- ============================== -->
+  <!-- Convergence path               -->
+  <!-- ============================== -->
+  <path d="M 405,140 C 440,140 440,190 465,190" stroke="#38bdf8" stroke-width="2.5" fill="none" filter="url(#glow-cyan)" marker-end="url(#arrow-cyan)" />
+  <path d="M 405,260 C 440,260 440,210 465,210" stroke="#38bdf8" stroke-width="2" fill="none" filter="url(#glow-cyan)" marker-end="url(#arrow-cyan)" />
+
+  <!-- ============================== -->
+  <!-- Stage 4: State Encoding        -->
+  <!-- ============================== -->
+  <g>
+    <rect x="465" y="155" width="90" height="90" rx="8" fill="none" stroke="#6366f1" stroke-width="2" filter="url(#glow-indigo)" />
+    <rect x="475" y="165" width="70" height="70" rx="5" fill="#1e1b4b" stroke="#818cf8" stroke-width="1" />
+
+    <!-- Encoding representation -->
+    <text x="510" y="190" text-anchor="middle" fill="#38bdf8" font-family="'Courier New', monospace" font-size="10" font-weight="bold">|0⟩</text>
+    <text x="510" y="205" text-anchor="middle" fill="#a78bfa" font-family="'Courier New', monospace" font-size="10" font-weight="bold">|1⟩</text>
+    <text x="510" y="220" text-anchor="middle" fill="#38bdf8" font-family="'Courier New', monospace" font-size="10" font-weight="bold">|ψ⟩</text>
+
+    <!-- Label -->
+    <text x="510" y="270" text-anchor="middle" fill="#94a3b8" font-family="'Courier New', monospace" font-size="11" letter-spacing="0.5">State Encoding</text>
+  </g>
+
+  <!-- ============================== -->
+  <!-- Arrow: State Encoding → Result -->
+  <!-- ============================== -->
+  <line x1="555" y1="200" x2="625" y2="200" stroke="#38bdf8" stroke-width="2.5" filter="url(#glow-cyan)" marker-end="url(#arrow-cyan)" />
+
+  <!-- ============================== -->
+  <!-- Stage 5: Result                -->
+  <!-- ============================== -->
+  <g>
+    <!-- Outer ring -->
+    <circle cx="680" cy="200" r="38" fill="none" stroke="#6366f1" stroke-width="2" filter="url(#glow-indigo)" />
+    <!-- Inner filled circle -->
+    <circle cx="680" cy="200" r="28" fill="#312e81" stroke="#818cf8" stroke-width="1.5" />
+    <!-- Checkmark icon -->
+    <polyline points="667,200 676,210 694,188" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow-cyan)" />
+    <!-- Label -->
+    <text x="680" y="260" text-anchor="middle" fill="#94a3b8" font-family="'Courier New', monospace" font-size="11" letter-spacing="0.5">Result</text>
+  </g>
+
+  <!-- ============================== -->
+  <!-- Flow direction indicator       -->
+  <!-- ============================== -->
+  <g opacity="0.4">
+    <text x="400" y="380" text-anchor="middle" fill="#64748b" font-family="'Courier New', monospace" font-size="10" letter-spacing="2">FLOW DIRECTION →</text>
+  </g>
+
+  <!-- ============================== -->
+  <!-- Secondary feedback path        -->
+  <!-- ============================== -->
+  <path d="M 660,238 C 640,320 100,320 80,238" stroke="#a78bfa" stroke-width="1" fill="none" stroke-dasharray="3 5" opacity="0.25" />
+  <text x="370" y="335" text-anchor="middle" fill="#475569" font-family="'Courier New', monospace" font-size="9" letter-spacing="0.5">feedback loop</text>
+</svg>
+
+<style>
+  .execution-flow-diagram {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+</style>

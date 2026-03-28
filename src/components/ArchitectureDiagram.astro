@@ -1,0 +1,446 @@
+---
+// ArchitectureDiagram.astro — GraphCore Architecture Conceptual Diagram
+---
+
+<svg
+  viewBox="0 0 800 500"
+  xmlns="http://www.w3.org/2000/svg"
+  class="architecture-diagram"
+  role="img"
+  aria-label="GraphCore Architecture Diagram showing Graphene Substrate, Photonic Signal Grid, and Programmable Topology Layer"
+>
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bg-gradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0e17" />
+      <stop offset="100%" stop-color="#0f1729" />
+    </linearGradient>
+
+    <!-- Graphene hexagon fill -->
+    <linearGradient id="graphene-fill" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e3a5f" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#0f2744" stop-opacity="0.15" />
+    </linearGradient>
+
+    <!-- Photonic glow gradient -->
+    <linearGradient id="photonic-cyan" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0" />
+      <stop offset="20%" stop-color="#38bdf8" stop-opacity="0.9" />
+      <stop offset="80%" stop-color="#38bdf8" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0" />
+    </linearGradient>
+
+    <linearGradient id="photonic-blue" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2dd4bf" stop-opacity="0" />
+      <stop offset="30%" stop-color="#38bdf8" stop-opacity="0.7" />
+      <stop offset="70%" stop-color="#6366f1" stop-opacity="0.7" />
+      <stop offset="100%" stop-color="#a78bfa" stop-opacity="0" />
+    </linearGradient>
+
+    <linearGradient id="photonic-violet" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0" />
+      <stop offset="25%" stop-color="#8b5cf6" stop-opacity="0.8" />
+      <stop offset="75%" stop-color="#6366f1" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0" />
+    </linearGradient>
+
+    <linearGradient id="connection-vertical" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0" />
+      <stop offset="40%" stop-color="#a78bfa" stop-opacity="0.6" />
+      <stop offset="60%" stop-color="#6366f1" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Node radial gradient -->
+    <radialGradient id="node-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6366f1" stop-opacity="1" />
+      <stop offset="60%" stop-color="#6366f1" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0" />
+    </radialGradient>
+
+    <radialGradient id="node-bright" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#c4b5fd" stop-opacity="1" />
+      <stop offset="100%" stop-color="#6366f1" stop-opacity="0.8" />
+    </radialGradient>
+
+    <!-- Glow filters -->
+    <filter id="glow-cyan" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur1" />
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur2" />
+        <feMergeNode in="blur1" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="glow-violet" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur1" />
+      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur2" />
+        <feMergeNode in="blur1" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="glow-node" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="soft-blur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" />
+    </filter>
+
+    <filter id="hex-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="shadow" />
+      <feFlood flood-color="#38bdf8" flood-opacity="0.15" result="color" />
+      <feComposite in="color" in2="shadow" operator="in" result="glow" />
+      <feMerge>
+        <feMergeNode in="glow" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Hexagon pattern for graphene substrate -->
+    <pattern id="hex-pattern" x="0" y="0" width="56" height="48.5" patternUnits="userSpaceOnUse">
+      <polygon
+        points="28,0 52,14 52,34.5 28,48.5 4,34.5 4,14"
+        fill="none"
+        stroke="#1e4d6e"
+        stroke-width="0.8"
+        opacity="0.5"
+      />
+      <polygon
+        points="28,0 52,14 52,34.5 28,48.5 4,34.5 4,14"
+        fill="url(#graphene-fill)"
+        stroke="none"
+        opacity="0.3"
+      />
+    </pattern>
+
+    <!-- Dot grid pattern -->
+    <pattern id="dot-grid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="10" cy="10" r="0.5" fill="#1e3a5f" opacity="0.4" />
+    </pattern>
+
+    <!-- Arrow marker -->
+    <marker id="arrow-violet" viewBox="0 0 6 6" refX="3" refY="3" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 6 3 L 0 6 z" fill="#a78bfa" opacity="0.7" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bg-gradient)" />
+  <rect width="800" height="500" fill="url(#dot-grid)" opacity="0.5" />
+
+  <!-- ============================================ -->
+  <!-- LAYER 1: Graphene Substrate (bottom)         -->
+  <!-- ============================================ -->
+  <g id="layer-graphene" opacity="0.9">
+    <!-- Hexagonal substrate area -->
+    <rect x="40" y="350" width="720" height="120" rx="6" fill="url(#hex-pattern)" filter="url(#hex-shadow)" />
+    <rect x="40" y="350" width="720" height="120" rx="6" fill="none" stroke="#1e4d6e" stroke-width="1" opacity="0.4" />
+
+    <!-- Substrate detail lines -->
+    <line x1="60" y1="390" x2="740" y2="390" stroke="#1e4d6e" stroke-width="0.3" opacity="0.3" stroke-dasharray="4 8" />
+    <line x1="60" y1="420" x2="740" y2="420" stroke="#1e4d6e" stroke-width="0.3" opacity="0.3" stroke-dasharray="4 8" />
+
+    <!-- Carbon atom markers in hex grid -->
+    <circle cx="100" cy="380" r="2" fill="#2dd4bf" opacity="0.4" />
+    <circle cx="156" cy="380" r="2" fill="#2dd4bf" opacity="0.4" />
+    <circle cx="212" cy="380" r="2" fill="#2dd4bf" opacity="0.35" />
+    <circle cx="268" cy="380" r="2" fill="#2dd4bf" opacity="0.4" />
+    <circle cx="324" cy="380" r="2" fill="#2dd4bf" opacity="0.35" />
+    <circle cx="380" cy="380" r="2" fill="#2dd4bf" opacity="0.4" />
+    <circle cx="436" cy="380" r="2" fill="#2dd4bf" opacity="0.35" />
+    <circle cx="492" cy="380" r="2" fill="#2dd4bf" opacity="0.4" />
+    <circle cx="548" cy="380" r="2" fill="#2dd4bf" opacity="0.35" />
+    <circle cx="604" cy="380" r="2" fill="#2dd4bf" opacity="0.4" />
+    <circle cx="660" cy="380" r="2" fill="#2dd4bf" opacity="0.35" />
+    <circle cx="716" cy="380" r="2" fill="#2dd4bf" opacity="0.4" />
+
+    <circle cx="128" cy="404" r="2" fill="#2dd4bf" opacity="0.35" />
+    <circle cx="184" cy="404" r="2" fill="#2dd4bf" opacity="0.4" />
+    <circle cx="240" cy="404" r="2" fill="#2dd4bf" opacity="0.35" />
+    <circle cx="296" cy="404" r="2" fill="#2dd4bf" opacity="0.4" />
+    <circle cx="352" cy="404" r="2" fill="#2dd4bf" opacity="0.35" />
+    <circle cx="408" cy="404" r="2" fill="#2dd4bf" opacity="0.4" />
+    <circle cx="464" cy="404" r="2" fill="#2dd4bf" opacity="0.35" />
+    <circle cx="520" cy="404" r="2" fill="#2dd4bf" opacity="0.4" />
+    <circle cx="576" cy="404" r="2" fill="#2dd4bf" opacity="0.35" />
+    <circle cx="632" cy="404" r="2" fill="#2dd4bf" opacity="0.4" />
+    <circle cx="688" cy="404" r="2" fill="#2dd4bf" opacity="0.35" />
+
+    <circle cx="100" cy="428" r="2" fill="#2dd4bf" opacity="0.4" />
+    <circle cx="156" cy="428" r="2" fill="#2dd4bf" opacity="0.35" />
+    <circle cx="212" cy="428" r="2" fill="#2dd4bf" opacity="0.4" />
+    <circle cx="268" cy="428" r="2" fill="#2dd4bf" opacity="0.35" />
+    <circle cx="324" cy="428" r="2" fill="#2dd4bf" opacity="0.4" />
+    <circle cx="380" cy="428" r="2" fill="#2dd4bf" opacity="0.35" />
+    <circle cx="436" cy="428" r="2" fill="#2dd4bf" opacity="0.4" />
+    <circle cx="492" cy="428" r="2" fill="#2dd4bf" opacity="0.35" />
+    <circle cx="548" cy="428" r="2" fill="#2dd4bf" opacity="0.4" />
+    <circle cx="604" cy="428" r="2" fill="#2dd4bf" opacity="0.35" />
+    <circle cx="660" cy="428" r="2" fill="#2dd4bf" opacity="0.4" />
+    <circle cx="716" cy="428" r="2" fill="#2dd4bf" opacity="0.35" />
+
+    <!-- Label -->
+    <text x="60" y="485" fill="#2dd4bf" font-family="'JetBrains Mono', 'Fira Code', 'SF Mono', monospace" font-size="10" letter-spacing="2" opacity="0.8">
+      GRAPHENE SUBSTRATE
+    </text>
+    <line x1="60" y1="490" x2="230" y2="490" stroke="#2dd4bf" stroke-width="0.5" opacity="0.4" />
+  </g>
+
+  <!-- ============================================ -->
+  <!-- LAYER 2: Photonic Signal Grid (middle)       -->
+  <!-- ============================================ -->
+  <g id="layer-photonic" opacity="0.9">
+    <!-- Horizontal photonic waveguides -->
+    <line x1="40" y1="220" x2="760" y2="220" stroke="url(#photonic-cyan)" stroke-width="1.5" filter="url(#glow-cyan)" opacity="0.7" />
+    <line x1="40" y1="250" x2="760" y2="250" stroke="url(#photonic-blue)" stroke-width="1" opacity="0.4" />
+    <line x1="40" y1="280" x2="760" y2="280" stroke="url(#photonic-cyan)" stroke-width="1.5" filter="url(#glow-cyan)" opacity="0.7" />
+    <line x1="40" y1="310" x2="760" y2="310" stroke="url(#photonic-blue)" stroke-width="1" opacity="0.4" />
+
+    <!-- Vertical photonic channels -->
+    <line x1="140" y1="190" x2="140" y2="345" stroke="#38bdf8" stroke-width="0.8" opacity="0.25" stroke-dasharray="3 5" />
+    <line x1="260" y1="190" x2="260" y2="345" stroke="#38bdf8" stroke-width="0.8" opacity="0.25" stroke-dasharray="3 5" />
+    <line x1="380" y1="190" x2="380" y2="345" stroke="#38bdf8" stroke-width="0.8" opacity="0.25" stroke-dasharray="3 5" />
+    <line x1="500" y1="190" x2="500" y2="345" stroke="#38bdf8" stroke-width="0.8" opacity="0.25" stroke-dasharray="3 5" />
+    <line x1="620" y1="190" x2="620" y2="345" stroke="#38bdf8" stroke-width="0.8" opacity="0.25" stroke-dasharray="3 5" />
+
+    <!-- Diagonal photonic routing paths -->
+    <path d="M 100 200 Q 200 230 260 220" stroke="#38bdf8" stroke-width="1" fill="none" filter="url(#glow-cyan)" opacity="0.5" />
+    <path d="M 300 200 Q 400 240 500 220" stroke="#8b5cf6" stroke-width="1" fill="none" filter="url(#glow-cyan)" opacity="0.5" />
+    <path d="M 500 280 Q 580 250 660 280" stroke="#38bdf8" stroke-width="1" fill="none" filter="url(#glow-cyan)" opacity="0.5" />
+    <path d="M 140 280 Q 220 310 300 280" stroke="#a78bfa" stroke-width="1" fill="none" filter="url(#glow-cyan)" opacity="0.4" />
+
+    <!-- Photon pulse indicators (animated-looking) -->
+    <circle cx="200" cy="220" r="3" fill="#38bdf8" filter="url(#glow-cyan)" opacity="0.9">
+      <animate attributeName="cx" values="40;760;40" dur="6s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="600" cy="280" r="3" fill="#6366f1" filter="url(#glow-cyan)" opacity="0.9">
+      <animate attributeName="cx" values="760;40;760" dur="5s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="380" cy="250" r="2" fill="#a78bfa" filter="url(#glow-cyan)" opacity="0.7">
+      <animate attributeName="cx" values="40;760;40" dur="8s" repeatCount="indefinite" />
+    </circle>
+
+    <!-- Signal intersection nodes on photonic grid -->
+    <g filter="url(#glow-node)">
+      <circle cx="140" cy="220" r="5" fill="url(#node-glow)" />
+      <circle cx="140" cy="220" r="2.5" fill="url(#node-bright)" />
+    </g>
+    <g filter="url(#glow-node)">
+      <circle cx="260" cy="220" r="5" fill="url(#node-glow)" />
+      <circle cx="260" cy="220" r="2.5" fill="url(#node-bright)" />
+    </g>
+    <g filter="url(#glow-node)">
+      <circle cx="380" cy="220" r="5" fill="url(#node-glow)" />
+      <circle cx="380" cy="220" r="2.5" fill="url(#node-bright)" />
+    </g>
+    <g filter="url(#glow-node)">
+      <circle cx="500" cy="220" r="5" fill="url(#node-glow)" />
+      <circle cx="500" cy="220" r="2.5" fill="url(#node-bright)" />
+    </g>
+    <g filter="url(#glow-node)">
+      <circle cx="620" cy="220" r="5" fill="url(#node-glow)" />
+      <circle cx="620" cy="220" r="2.5" fill="url(#node-bright)" />
+    </g>
+
+    <g filter="url(#glow-node)">
+      <circle cx="140" cy="280" r="5" fill="url(#node-glow)" />
+      <circle cx="140" cy="280" r="2.5" fill="url(#node-bright)" />
+    </g>
+    <g filter="url(#glow-node)">
+      <circle cx="260" cy="280" r="5" fill="url(#node-glow)" />
+      <circle cx="260" cy="280" r="2.5" fill="url(#node-bright)" />
+    </g>
+    <g filter="url(#glow-node)">
+      <circle cx="380" cy="280" r="5" fill="url(#node-glow)" />
+      <circle cx="380" cy="280" r="2.5" fill="url(#node-bright)" />
+    </g>
+    <g filter="url(#glow-node)">
+      <circle cx="500" cy="280" r="5" fill="url(#node-glow)" />
+      <circle cx="500" cy="280" r="2.5" fill="url(#node-bright)" />
+    </g>
+    <g filter="url(#glow-node)">
+      <circle cx="620" cy="280" r="5" fill="url(#node-glow)" />
+      <circle cx="620" cy="280" r="2.5" fill="url(#node-bright)" />
+    </g>
+
+    <!-- Waveguide edge markers -->
+    <rect x="38" y="217" width="4" height="6" rx="1" fill="#38bdf8" opacity="0.6" />
+    <rect x="758" y="217" width="4" height="6" rx="1" fill="#38bdf8" opacity="0.6" />
+    <rect x="38" y="277" width="4" height="6" rx="1" fill="#38bdf8" opacity="0.6" />
+    <rect x="758" y="277" width="4" height="6" rx="1" fill="#38bdf8" opacity="0.6" />
+
+    <!-- Label -->
+    <text x="60" y="205" fill="#38bdf8" font-family="'JetBrains Mono', 'Fira Code', 'SF Mono', monospace" font-size="10" letter-spacing="2" opacity="0.8">
+      PHOTONIC SIGNAL GRID
+    </text>
+    <line x1="60" y1="210" x2="245" y2="210" stroke="#38bdf8" stroke-width="0.5" opacity="0.4" />
+  </g>
+
+  <!-- ============================================ -->
+  <!-- LAYER 3: Programmable Topology (top)         -->
+  <!-- ============================================ -->
+  <g id="layer-topology" opacity="0.9">
+    <!-- Topology mesh lines -->
+    <line x1="120" y1="80" x2="380" y2="120" stroke="#a78bfa" stroke-width="0.7" opacity="0.3" />
+    <line x1="380" y1="120" x2="620" y2="80" stroke="#a78bfa" stroke-width="0.7" opacity="0.3" />
+    <line x1="120" y1="80" x2="200" y2="150" stroke="#a78bfa" stroke-width="0.7" opacity="0.3" />
+    <line x1="620" y1="80" x2="560" y2="150" stroke="#a78bfa" stroke-width="0.7" opacity="0.3" />
+    <line x1="200" y1="150" x2="380" y2="120" stroke="#a78bfa" stroke-width="0.7" opacity="0.3" />
+    <line x1="560" y1="150" x2="380" y2="120" stroke="#a78bfa" stroke-width="0.7" opacity="0.3" />
+    <line x1="200" y1="150" x2="560" y2="150" stroke="#a78bfa" stroke-width="0.7" opacity="0.2" />
+
+    <!-- Additional mesh connections -->
+    <line x1="120" y1="80" x2="380" y2="60" stroke="#6366f1" stroke-width="0.5" opacity="0.2" />
+    <line x1="620" y1="80" x2="380" y2="60" stroke="#6366f1" stroke-width="0.5" opacity="0.2" />
+    <line x1="380" y1="60" x2="380" y2="120" stroke="#6366f1" stroke-width="0.5" opacity="0.2" />
+
+    <!-- Programmable topology nodes -->
+    <g filter="url(#glow-node)">
+      <circle cx="380" cy="60" r="8" fill="url(#node-glow)" />
+      <circle cx="380" cy="60" r="4" fill="url(#node-bright)" />
+      <circle cx="380" cy="60" r="1.5" fill="#ffffff" opacity="0.9" />
+    </g>
+    <g filter="url(#glow-node)">
+      <circle cx="120" cy="80" r="8" fill="url(#node-glow)" />
+      <circle cx="120" cy="80" r="4" fill="url(#node-bright)" />
+      <circle cx="120" cy="80" r="1.5" fill="#ffffff" opacity="0.9" />
+    </g>
+    <g filter="url(#glow-node)">
+      <circle cx="620" cy="80" r="8" fill="url(#node-glow)" />
+      <circle cx="620" cy="80" r="4" fill="url(#node-bright)" />
+      <circle cx="620" cy="80" r="1.5" fill="#ffffff" opacity="0.9" />
+    </g>
+    <g filter="url(#glow-node)">
+      <circle cx="380" cy="120" r="10" fill="url(#node-glow)" />
+      <circle cx="380" cy="120" r="5" fill="url(#node-bright)" />
+      <circle cx="380" cy="120" r="2" fill="#ffffff" opacity="0.9" />
+    </g>
+    <g filter="url(#glow-node)">
+      <circle cx="200" cy="150" r="8" fill="url(#node-glow)" />
+      <circle cx="200" cy="150" r="4" fill="url(#node-bright)" />
+      <circle cx="200" cy="150" r="1.5" fill="#ffffff" opacity="0.9" />
+    </g>
+    <g filter="url(#glow-node)">
+      <circle cx="560" cy="150" r="8" fill="url(#node-glow)" />
+      <circle cx="560" cy="150" r="4" fill="url(#node-bright)" />
+      <circle cx="560" cy="150" r="1.5" fill="#ffffff" opacity="0.9" />
+    </g>
+
+    <!-- Node labels -->
+    <text x="380" y="48" text-anchor="middle" fill="#a78bfa" font-family="'JetBrains Mono', 'Fira Code', 'SF Mono', monospace" font-size="7" opacity="0.7">CTRL</text>
+    <text x="120" y="68" text-anchor="middle" fill="#a78bfa" font-family="'JetBrains Mono', 'Fira Code', 'SF Mono', monospace" font-size="7" opacity="0.7">N₀</text>
+    <text x="620" y="68" text-anchor="middle" fill="#a78bfa" font-family="'JetBrains Mono', 'Fira Code', 'SF Mono', monospace" font-size="7" opacity="0.7">N₁</text>
+    <text x="380" y="142" text-anchor="middle" fill="#a78bfa" font-family="'JetBrains Mono', 'Fira Code', 'SF Mono', monospace" font-size="7" opacity="0.7">HUB</text>
+    <text x="200" y="168" text-anchor="middle" fill="#a78bfa" font-family="'JetBrains Mono', 'Fira Code', 'SF Mono', monospace" font-size="7" opacity="0.7">N₂</text>
+    <text x="560" y="168" text-anchor="middle" fill="#a78bfa" font-family="'JetBrains Mono', 'Fira Code', 'SF Mono', monospace" font-size="7" opacity="0.7">N₃</text>
+
+    <!-- Label -->
+    <text x="60" y="175" fill="#a78bfa" font-family="'JetBrains Mono', 'Fira Code', 'SF Mono', monospace" font-size="10" letter-spacing="2" opacity="0.8">
+      PROGRAMMABLE TOPOLOGY LAYER
+    </text>
+    <line x1="60" y1="180" x2="315" y2="180" stroke="#a78bfa" stroke-width="0.5" opacity="0.4" />
+  </g>
+
+  <!-- ============================================ -->
+  <!-- INTER-LAYER CONNECTIONS                      -->
+  <!-- ============================================ -->
+  <g id="inter-layer-connections" opacity="0.6">
+    <!-- Topology → Photonic connections -->
+    <line x1="380" y1="130" x2="380" y2="215" stroke="url(#connection-vertical)" stroke-width="1.5" marker-end="url(#arrow-violet)" />
+    <line x1="200" y1="158" x2="260" y2="215" stroke="url(#connection-vertical)" stroke-width="1" />
+    <line x1="560" y1="158" x2="500" y2="215" stroke="url(#connection-vertical)" stroke-width="1" />
+    <line x1="120" y1="88" x2="140" y2="215" stroke="url(#connection-vertical)" stroke-width="0.8" opacity="0.4" />
+    <line x1="620" y1="88" x2="620" y2="215" stroke="url(#connection-vertical)" stroke-width="0.8" opacity="0.4" />
+
+    <!-- Photonic → Graphene connections -->
+    <line x1="140" y1="290" x2="140" y2="345" stroke="url(#connection-vertical)" stroke-width="1" opacity="0.5" />
+    <line x1="260" y1="290" x2="240" y2="345" stroke="url(#connection-vertical)" stroke-width="1" opacity="0.5" />
+    <line x1="380" y1="290" x2="380" y2="345" stroke="url(#connection-vertical)" stroke-width="1" opacity="0.5" />
+    <line x1="500" y1="290" x2="520" y2="345" stroke="url(#connection-vertical)" stroke-width="1" opacity="0.5" />
+    <line x1="620" y1="290" x2="620" y2="345" stroke="url(#connection-vertical)" stroke-width="1" opacity="0.5" />
+
+    <!-- Connection pulse nodes at junctions -->
+    <circle cx="380" cy="175" r="2" fill="#a78bfa" opacity="0.5">
+      <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="380" cy="318" r="2" fill="#6366f1" opacity="0.5">
+      <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2.5s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="260" cy="175" r="1.5" fill="#a78bfa" opacity="0.4">
+      <animate attributeName="opacity" values="0.2;0.7;0.2" dur="3s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="500" cy="175" r="1.5" fill="#a78bfa" opacity="0.4">
+      <animate attributeName="opacity" values="0.2;0.7;0.2" dur="2.8s" repeatCount="indefinite" />
+    </circle>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- TITLE AND ANNOTATIONS                        -->
+  <!-- ============================================ -->
+  <g id="annotations">
+    <!-- Title -->
+    <text x="400" y="30" text-anchor="middle" fill="#e2e8f0" font-family="'JetBrains Mono', 'Fira Code', 'SF Mono', monospace" font-size="14" font-weight="bold" letter-spacing="3">
+      GRAPHCORE ARCHITECTURE
+    </text>
+    <text x="400" y="45" text-anchor="middle" fill="#64748b" font-family="'JetBrains Mono', 'Fira Code', 'SF Mono', monospace" font-size="8" letter-spacing="1.5">
+      Graphene-Photonic Hybrid Computing Substrate
+    </text>
+
+    <!-- Side annotation: data flow -->
+    <g transform="translate(745, 240)" opacity="0.5">
+      <line x1="0" y1="-30" x2="0" y2="30" stroke="#64748b" stroke-width="0.5" />
+      <polygon points="-3,-27 3,-27 0,-33" fill="#64748b" />
+      <polygon points="-3,27 3,27 0,33" fill="#64748b" />
+      <text x="5" y="0" fill="#64748b" font-family="'JetBrains Mono', 'Fira Code', 'SF Mono', monospace" font-size="6" transform="rotate(90, 5, 0)" text-anchor="middle">
+        DATA FLOW
+      </text>
+    </g>
+
+    <!-- Legend -->
+    <g transform="translate(55, 50)" opacity="0.7">
+      <rect x="0" y="0" width="130" height="72" rx="4" fill="#0a0e17" stroke="#1e3a5f" stroke-width="0.5" opacity="0.8" />
+      <text x="10" y="16" fill="#94a3b8" font-family="'JetBrains Mono', 'Fira Code', 'SF Mono', monospace" font-size="7" font-weight="bold" letter-spacing="1">LEGEND</text>
+      <line x1="10" y1="22" x2="120" y2="22" stroke="#1e3a5f" stroke-width="0.5" />
+
+      <line x1="10" y1="33" x2="30" y2="33" stroke="#38bdf8" stroke-width="1.5" />
+      <text x="36" y="36" fill="#38bdf8" font-family="'JetBrains Mono', 'Fira Code', 'SF Mono', monospace" font-size="6">Photonic path</text>
+
+      <circle cx="20" cy="48" r="4" fill="#6366f1" opacity="0.8" />
+      <circle cx="20" cy="48" r="2" fill="#c4b5fd" />
+      <text x="36" y="51" fill="#6366f1" font-family="'JetBrains Mono', 'Fira Code', 'SF Mono', monospace" font-size="6">Programmable node</text>
+
+      <line x1="10" y1="63" x2="30" y2="63" stroke="#a78bfa" stroke-width="1" />
+      <text x="36" y="66" fill="#a78bfa" font-family="'JetBrains Mono', 'Fira Code', 'SF Mono', monospace" font-size="6">Layer connection</text>
+    </g>
+
+    <!-- Scale indicator -->
+    <g transform="translate(650, 470)" opacity="0.4">
+      <line x1="0" y1="0" x2="80" y2="0" stroke="#64748b" stroke-width="0.5" />
+      <line x1="0" y1="-3" x2="0" y2="3" stroke="#64748b" stroke-width="0.5" />
+      <line x1="80" y1="-3" x2="80" y2="3" stroke="#64748b" stroke-width="0.5" />
+      <text x="40" y="12" text-anchor="middle" fill="#64748b" font-family="'JetBrains Mono', 'Fira Code', 'SF Mono', monospace" font-size="6">
+        ~10 μm
+      </text>
+    </g>
+  </g>
+</svg>
+
+<style>
+  .architecture-diagram {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+</style>
